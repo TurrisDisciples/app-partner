@@ -9,6 +9,17 @@ import android.view.View;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.ActionBar;
 import android.view.MenuItem;
+import android.widget.TextView;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
  * An activity representing a single Item detail screen. This
@@ -61,6 +72,8 @@ public class ItemDetailActivity extends AppCompatActivity {
                     .add(R.id.item_detail_container, fragment)
                     .commit();
         }
+
+        getTripDetails();
     }
 
     @Override
@@ -77,5 +90,32 @@ public class ItemDetailActivity extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+
+    private void getTripDetails() {
+        final TextView mTextView = (TextView) findViewById(R.id.origen);
+        // Instantiate the RequestQueue.
+        RequestQueue queue = Volley.newRequestQueue(this);
+        String url = "http://ip.jsontest.com/";
+
+        JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.GET, url,
+                null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    mTextView.setText(response.get("ip").toString());
+                } catch (JSONException e) {
+
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                mTextView.setText("That didn't work!");
+            }
+        });
+        // Add the request to the RequestQueue.
+        queue.add(jsObjRequest);
     }
 }

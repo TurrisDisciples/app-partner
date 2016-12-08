@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.argentruck.argentruck_partner.dummy.DummyContent;
@@ -104,6 +105,9 @@ public class ItemListActivity extends AppCompatActivity {
                                 .replace(R.id.item_detail_container, fragment)
                                 .commit();
                     } else {
+                        Toast.makeText(getApplicationContext(),
+                                ItemDetailFragment.ARG_ITEM_ID + ": " + holder.mItem.id,
+                                Toast.LENGTH_SHORT).show();
                         Context context = v.getContext();
                         Intent intent = new Intent(context, ItemDetailActivity.class);
                         intent.putExtra(ItemDetailFragment.ARG_ITEM_ID, holder.mItem.id);

@@ -13,19 +13,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ListView;
-import android.widget.TextView;
-
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -58,13 +46,13 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        Button getIpButton = (Button) findViewById(R.id.get_ip);
-        getIpButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getIP();
-            }
-        });
+//        Button getIpButton = (Button) findViewById(R.id.get_ip);
+//        getIpButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                getIP();
+//            }
+//        });
 
 
         // Instancia del ListView.
@@ -82,11 +70,8 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 Intent intent = new Intent(MainActivity.this, ItemDetailActivity.class);
+                intent.putExtra(ItemDetailFragment.ARG_ITEM_ID, 1);
                 startActivity(intent);
-//                Client currentClient = mClientsAdapter.getItem(position);
-//                Toast.makeText(getApplicationContext(),
-//                        "Iniciar screen de detalle para: \n" + currentClient.getName(),
-//                        Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -129,13 +114,9 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
+        if (id == R.id.perfil) {
             // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
+        } else if (id == R.id.sign_out) {
 
         } else if (id == R.id.nav_share) {
 
@@ -148,29 +129,29 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    public void getIP() {
-        final TextView mTextView = (TextView) findViewById(R.id.textView2);
-        // Instantiate the RequestQueue.
-        RequestQueue queue = Volley.newRequestQueue(this);
-        String url ="http://ip.jsontest.com/";
-
-        JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.GET, url,
-                null, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                try {
-                    mTextView.setText("Your IP is: "+ response.get("ip"));
-                } catch (JSONException e) {
-
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                mTextView.setText("That didn't work!");
-            }
-        });
-        // Add the request to the RequestQueue.
-        queue.add(jsObjRequest);
-    }
+//    public void getIP() {
+//        final TextView mTextView = (TextView) findViewById(R.id.textView2);
+//        // Instantiate the RequestQueue.
+//        RequestQueue queue = Volley.newRequestQueue(this);
+//        String url ="http://ip.jsontest.com/";
+//
+//        JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.GET, url,
+//                null, new Response.Listener<JSONObject>() {
+//            @Override
+//            public void onResponse(JSONObject response) {
+//                try {
+//                    mTextView.setText("Your IP is: "+ response.get("ip"));
+//                } catch (JSONException e) {
+//
+//                }
+//            }
+//        }, new Response.ErrorListener() {
+//            @Override
+//            public void onErrorResponse(VolleyError error) {
+//                mTextView.setText("That didn't work!");
+//            }
+//        });
+//        // Add the request to the RequestQueue.
+//        queue.add(jsObjRequest);
+//    }
 }
