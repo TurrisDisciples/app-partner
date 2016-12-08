@@ -28,4 +28,12 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="33dp"
         android:id="@+id/get_ip" />
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/get_ip"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="39dp"
+        android:id="@+id/clients_list" />
 </RelativeLayout>

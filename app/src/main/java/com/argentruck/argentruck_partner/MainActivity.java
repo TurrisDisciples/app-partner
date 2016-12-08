@@ -12,8 +12,11 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -27,6 +30,9 @@ import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    private ListView mClientsList;
+    private ClientsAdapter mClientsAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +64,28 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(View view) {
                 getIP();
+            }
+        });
+
+
+        // Instancia del ListView.
+        mClientsList = (ListView) findViewById(R.id.clients_list);
+
+        // Inicializar el adaptador con la fuente de datos.
+        mClientsAdapter = new ClientsAdapter(this,
+                ClientsRepository.getInstance().getClients());
+
+        //Relacionando la lista con el adaptador
+        mClientsList.setAdapter(mClientsAdapter);
+
+        // Eventos
+        mClientsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                Client currentClient = mClientsAdapter.getItem(position);
+                Toast.makeText(getApplicationContext(),
+                        "Iniciar screen de detalle para: \n" + currentClient.getName(),
+                        Toast.LENGTH_SHORT).show();
             }
         });
     }
