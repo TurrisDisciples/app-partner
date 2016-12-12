@@ -25,22 +25,32 @@
         </activity>
         <activity
             android:name=".MainActivity"
-            android:label="@string/title_activity_main"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:label="@string/tus_viajes"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
         <activity
             android:name=".ItemListActivity"
             android:label="@string/title_item_list"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ItemDetailActivity"
-            android:label="@string/title_item_detail"
-            android:parentActivityName=".ItemListActivity"
+            android:label=" "
+            android:parentActivityName=".ClientsActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.argentruck.argentruck_partner.ItemListActivity" />
+                android:value="com.argentruck.argentruck_partner.ClientsActivity" />
         </activity>
-        <activity android:name=".NewTripActivity"></activity>
+        <activity
+            android:name=".NewTripActivity"/>
+        <activity
+            android:name=".ClientsActivity"
+            android:label="@string/clientes"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.argentruck.argentruck_partner.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

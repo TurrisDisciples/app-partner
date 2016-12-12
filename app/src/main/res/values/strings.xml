@@ -14,11 +14,12 @@
         completions."
     </string>
     <string name="title_activity_main">MainActivity</string>
+    <string name="tus_viajes">Tus viajes</string>
+    <string name="clientes">Clientes</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
-    <string name="action_settings">Settings</string>
     <string name="get_ip">Get your IP</string>
     <string name="title_item_list">Items</string>
     <string name="title_item_detail">Item Detail</string>
