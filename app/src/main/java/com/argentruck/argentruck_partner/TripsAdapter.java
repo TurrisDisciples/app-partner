@@ -1,15 +1,15 @@
 package com.argentruck.argentruck_partner;
 
-import android.widget.ImageView;
-
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
+import com.amulyakhare.textdrawable.TextDrawable;
 
 import java.util.List;
 
@@ -17,6 +17,8 @@ public class TripsAdapter extends ArrayAdapter<Client> {
     public TripsAdapter(Context context, List<Client> objects) {
         super(context, 0, objects);
     }
+
+    private char contInicial = 'A';
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
@@ -35,10 +37,12 @@ public class TripsAdapter extends ArrayAdapter<Client> {
                     false);
 
             holder = new ViewHolder();
-            holder.avatar = (ImageView) convertView.findViewById(R.id.iv_avatar);
-            holder.name = (TextView) convertView.findViewById(R.id.tv_name);
-            holder.title = (TextView) convertView.findViewById(R.id.tv_title);
-            holder.company = (TextView) convertView.findViewById(R.id.tv_company);
+            holder.inicial = (ImageView) convertView.findViewById(R.id.image_view);
+            holder.viaje = (TextView) convertView.findViewById(R.id.viaje);
+            holder.capacidad = (TextView) convertView.findViewById(R.id.capacidad);
+            holder.fecha = (TextView) convertView.findViewById(R.id.title);
+
+
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
@@ -47,19 +51,22 @@ public class TripsAdapter extends ArrayAdapter<Client> {
         // Client actual.
         Client Client = getItem(position);
 
-        // Setup.
-        holder.name.setText(Client.getName());
-        holder.title.setText(Client.getTitle());
-        holder.company.setText(Client.getCompany());
-        Glide.with(getContext()).load(Client.getImage()).into(holder.avatar);
+        TextDrawable drawable = TextDrawable.builder()
+                .buildRound(String.valueOf(contInicial), Color.BLUE);
+        contInicial++;
+
+        holder.inicial.setImageDrawable(drawable);
+        holder.viaje.setText(Client.getName() + " - " + Client.getTitle());
+        holder.capacidad.setText(Client.getCapacidad());
+        holder.fecha.setText(Client.getFecha());
 
         return convertView;
     }
 
     static class ViewHolder {
-        ImageView avatar;
-        TextView name;
-        TextView title;
-        TextView company;
+        ImageView inicial;
+        TextView viaje;
+        TextView capacidad;
+        TextView fecha;
     }
 }

@@ -14,6 +14,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_centerHorizontal="true"
-        android:id="@+id/clients_list"
+        android:id="@+id/trips_list"
         android:layout_alignParentTop="true" />
 </RelativeLayout>

@@ -7,17 +7,17 @@ import java.util.List;
 /**
  * Repositorio ficticio de Clients
  */
-public class Otrorepo {
-    private static Otrorepo repository = new Otrorepo();
+public class TripsRepository {
+    private static TripsRepository repository = new TripsRepository();
     private HashMap<String, Client> otrara = new HashMap<>();
 
-    public static Otrorepo getInstance() {
+    public static TripsRepository getInstance() {
         return repository;
     }
 
-    private Otrorepo() {
-        saveClient(new Client("asdsad", "CEO", "Insures S.O.", R.drawable.ic_menu_camera));
-        saveClient(new Client("qweqwwew", "Asistente", "Hospital Blue", R.drawable.ic_menu_gallery));
+    private TripsRepository() {
+        saveClient(new Client("Buenos Aires", "Rosario", "100 tn", R.drawable.ic_menu_camera));
+        saveClient(new Client("Formosa", "La quiaca", "20 pallets", R.drawable.ic_menu_gallery));
 //        saveClient(new Client("asdasdasd", "Directora de Marketing", "Electrical Parts ltd", R.drawable.ic_menu_camera));
 //        saveClient(new Client("wqeqdsad", "Diseñadora de Producto", "Creativa App", R.drawable.ic_menu_camera));
 //        saveClient(new Client("xcxzczxcas", "Supervisor de Ventas", "Neumáticos Press", R.drawable.ic_menu_camera));

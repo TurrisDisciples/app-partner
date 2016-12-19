@@ -36,8 +36,8 @@ public class ClientsAdapter extends ArrayAdapter<Client> {
 
             holder = new ViewHolder();
             holder.avatar = (ImageView) convertView.findViewById(R.id.iv_avatar);
-            holder.name = (TextView) convertView.findViewById(R.id.tv_name);
-            holder.title = (TextView) convertView.findViewById(R.id.tv_title);
+            holder.name = (TextView) convertView.findViewById(R.id.name);
+            holder.title = (TextView) convertView.findViewById(R.id.title);
             holder.company = (TextView) convertView.findViewById(R.id.tv_company);
             convertView.setTag(holder);
         } else {

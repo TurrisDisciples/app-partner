@@ -17,10 +17,8 @@ import android.widget.ListView;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private ListView mClientsList;
     private ListView mTripsList;
-    private ClientsAdapter mClientsAdapter;
-    private TripsAdapter otrosAdapter;
+    private TripsAdapter tripsAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,17 +55,17 @@ public class MainActivity extends AppCompatActivity
 
 
         // Instancia del ListView.
-        mClientsList = (ListView) findViewById(R.id.clients_list);
+        mTripsList = (ListView) findViewById(R.id.trips_list);
 
         // Inicializar el adaptador con la fuente de datos.
-        mClientsAdapter = new ClientsAdapter(this,
-                ClientsRepository.getInstance().getClients());
+        tripsAdapter = new TripsAdapter(this,
+                TripsRepository.getInstance().getClients());
 
         //Relacionando la lista con el adaptador
-        mClientsList.setAdapter(mClientsAdapter);
+        mTripsList.setAdapter(tripsAdapter);
 
         // Eventos
-        mClientsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        mTripsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 Intent intent = new Intent(MainActivity.this, ClientsActivity.class);

@@ -25,7 +25,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_centerHorizontal="true"
-    android:id="@+id/trips_list"
+    android:id="@+id/clients_list"
     android:layout_alignParentTop="true"
     android:padding="10dp"
     android:layout_marginTop="?android:attr/actionBarSize"/>

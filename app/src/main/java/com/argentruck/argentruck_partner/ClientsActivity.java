@@ -12,8 +12,8 @@ import android.widget.ListView;
 
 public class ClientsActivity extends AppCompatActivity {
 
-    private ListView mTripsList;
-    private TripsAdapter otrosAdapter;
+    private ListView mClientsList;
+    private ClientsAdapter clientsAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,17 +30,17 @@ public class ClientsActivity extends AppCompatActivity {
         }
 
         // Instancia del ListView.
-        mTripsList = (ListView) findViewById(R.id.trips_list);
+        mClientsList = (ListView) findViewById(R.id.clients_list);
 
         // Inicializar el adaptador con la fuente de datos.
-        otrosAdapter = new TripsAdapter(this,
-                Otrorepo.getInstance().getClients());
+        clientsAdapter = new ClientsAdapter(this,
+                ClientsRepository.getInstance().getClients());
 
         //Relacionando la lista con el adaptador
-        mTripsList.setAdapter(otrosAdapter);
+        mClientsList.setAdapter(clientsAdapter);
 
         // Eventos
-        mTripsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        mClientsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 Intent intent = new Intent(ClientsActivity.this, ItemDetailActivity.class);

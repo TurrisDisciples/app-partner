@@ -8,6 +8,10 @@ public class Client {
     private String mName;
     private String mTitle;
     private String mCompany;
+    private String mCapacidad;
+    private String mFecha;
+    private String origen;
+    private String destino;
     private int mImage;
 
     public Client(String name, String title, String company, int image) {
@@ -16,6 +20,10 @@ public class Client {
         mTitle = title;
         mCompany = company;
         mImage = image;
+        origen = name;
+        destino = title;
+        mCapacidad = company;
+        mFecha = "10/25/2016";
     }
 
     public String getId() {
@@ -58,6 +66,22 @@ public class Client {
         this.mImage = mImage;
     }
 
+    public void setCapacidad(String capacidad) {
+        mCapacidad = capacidad;
+    }
+
+    public String getCapacidad() {
+        return mCapacidad;
+    }
+
+    public void setFecha(String fecha) {
+        mFecha = fecha;
+    }
+
+    public String getFecha() {
+        return mFecha;
+    }
+
     @Override
     public String toString() {
         return "Lead{" +
@@ -65,6 +89,10 @@ public class Client {
                 ", Compañía='" + mCompany + '\'' +
                 ", Nombre='" + mName + '\'' +
                 ", Cargo='" + mTitle + '\'' +
+                ", Origen='" + origen + '\'' +
+                ", Destino='" + destino + '\'' +
+                ", Capacidad='" + mCapacidad+ '\'' +
+                ", Fecha='" + mFecha+ '\'' +
                 '}';
     }
 }
