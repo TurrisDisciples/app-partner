@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -51,12 +52,34 @@ public class ClientsActivity extends AppCompatActivity {
     }
 
     @Override
+    public boolean onCreateOptionsMenu(final Menu menu) {
+
+        getMenuInflater().inflate(R.menu.clients_menu_icons, menu);
+        return true;
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        if (item.getItemId() == android.R.id.home) {
-            finish();
-            return true;
+        switch (item.getItemId()) {
+            case R.id.map:
+                Intent intent = new Intent(ClientsActivity.this, MapsActivity.class);
+                startActivity(intent);
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
         }
-        return false;
+
     }
+
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//
+//        if (item.getItemId() == android.R.id.home) {
+//            finish();
+//            return true;
+//        }
+//        return false;
+//    }
 }
