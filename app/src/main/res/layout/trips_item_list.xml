@@ -3,10 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:minHeight="?attr/listPreferredItemHeight"
     android:orientation="vertical"
     android:paddingBottom="8dp"
-    android:background="?attr/selectableItemBackground"
     android:paddingLeft="16sp"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="8dp">
@@ -32,26 +30,28 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/viaje"
                 android:textAppearance="?attr/textAppearanceListItem"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/capacidad"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignLeft="@+id/name"
-                android:layout_below="@+id/title"
                 android:text="Capacidad"
                 android:textAppearance="?attr/textAppearanceListItem"
-                tools:text="Blue Insurances Ltd" />
+                tools:text="Blue Insurances Ltd"
+                android:textSize="15sp"
+                android:textColor="#444" />
 
             <TextView
-                android:id="@+id/title"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_alignLeft="@+id/name"
-                android:layout_below="@+id/name"
+                android:id="@+id/fecha"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="Fecha"
-                tools:text="CEO" />
+                android:textAppearance="?attr/textAppearanceListItem"
+                tools:text="CEO"
+                android:textSize="15sp"
+                android:textColor="#444" />
 
         </LinearLayout>
     </LinearLayout>

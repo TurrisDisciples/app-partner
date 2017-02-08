@@ -1,5 +1,6 @@
 package com.argentruck.argentruck_partner;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -13,6 +14,21 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -45,24 +61,17 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-//        Button getIpButton = (Button) findViewById(R.id.get_ip);
-//        getIpButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                getIP();
-//            }
-//        });
-
+        getTravelsInfo();
 
         // Instancia del ListView.
         mTripsList = (ListView) findViewById(R.id.trips_list);
 
-        // Inicializar el adaptador con la fuente de datos.
-        tripsAdapter = new TripsAdapter(this,
-                TripsRepository.getInstance().getClients());
-
-        //Relacionando la lista con el adaptador
-        mTripsList.setAdapter(tripsAdapter);
+//        // Inicializar el adaptador con la fuente de datos.
+//        tripsAdapter = new TripsAdapter(this,
+//                TripsRepository.getInstance().getClients());
+//
+//        //Relacionando la lista con el adaptador
+//        mTripsList.setAdapter(tripsAdapter);
 
         // Eventos
         mTripsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -72,6 +81,58 @@ public class MainActivity extends AppCompatActivity
                 startActivity(intent);
             }
         });
+    }
+
+    public void getTravelsInfo() {
+        // Instantiate the RequestQueue.
+        RequestQueue queue = Volley.newRequestQueue(this);
+        String url = "http://192.168.0.5:3000/partners/myTravels?email=seba@live.com";
+
+        final Context context = getApplicationContext();
+
+        JsonArrayRequest jsObjRequest = new JsonArrayRequest(Request.Method.GET, url,
+                null, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+//                // Inicializar el adaptador con la fuente de datos.
+                tripsAdapter = new TripsAdapter(context, procesarResponse(response));
+//
+//                //Relacionando la lista con el adaptador
+                mTripsList.setAdapter(tripsAdapter);
+                Toast.makeText(context, response.toString(), Toast.LENGTH_LONG).show();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(context, error.toString(), Toast.LENGTH_LONG).show();
+            }
+        });
+        // Add the request to the RequestQueue.
+        queue.add(jsObjRequest);
+    }
+
+    public List<Trip> procesarResponse(JSONArray response) {
+        List<Trip> viajes = new ArrayList<>();
+        JSONObject trip = new JSONObject();
+        for(int i  = 0; i < response.length(); i++) {
+            try {
+                trip = (JSONObject) response.get(i);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            try {
+                viajes.add(new Trip(trip.getString("_id") ,
+                                    trip.getString("origin"),
+                                    trip.getString("destiny"),
+                                    trip.getString("capMax"),
+                                    trip.getString("date")));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return viajes;
+
     }
 
     @Override

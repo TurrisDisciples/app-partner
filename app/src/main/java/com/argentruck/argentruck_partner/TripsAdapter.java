@@ -13,8 +13,10 @@ import com.amulyakhare.textdrawable.TextDrawable;
 
 import java.util.List;
 
-public class TripsAdapter extends ArrayAdapter<Client> {
-    public TripsAdapter(Context context, List<Client> objects) {
+import static com.argentruck.argentruck_partner.R.id.fecha;
+
+public class TripsAdapter extends ArrayAdapter<Trip> {
+    public TripsAdapter(Context context, List<Trip> objects) {
         super(context, 0, objects);
     }
 
@@ -40,7 +42,7 @@ public class TripsAdapter extends ArrayAdapter<Client> {
             holder.inicial = (ImageView) convertView.findViewById(R.id.image_view);
             holder.viaje = (TextView) convertView.findViewById(R.id.viaje);
             holder.capacidad = (TextView) convertView.findViewById(R.id.capacidad);
-            holder.fecha = (TextView) convertView.findViewById(R.id.title);
+            holder.fecha = (TextView) convertView.findViewById(fecha);
 
 
             convertView.setTag(holder);
@@ -49,16 +51,16 @@ public class TripsAdapter extends ArrayAdapter<Client> {
         }
 
         // Client actual.
-        Client Client = getItem(position);
+        Trip viaje = getItem(position);
 
         TextDrawable drawable = TextDrawable.builder()
                 .buildRound(String.valueOf(contInicial), Color.BLUE);
         contInicial++;
 
         holder.inicial.setImageDrawable(drawable);
-        holder.viaje.setText(Client.getName() + " - " + Client.getTitle());
-        holder.capacidad.setText(Client.getCapacidad());
-        holder.fecha.setText(Client.getFecha());
+        holder.viaje.setText(viaje.getOrigen() + " - " + viaje.getDestino());
+        holder.capacidad.setText(viaje.getCapacidad());
+        holder.fecha.setText(viaje.getFecha());
 
         return convertView;
     }
