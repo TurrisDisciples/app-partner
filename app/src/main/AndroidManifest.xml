@@ -28,11 +28,13 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/tus_viajes"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
         <activity
             android:name=".ItemListActivity"
             android:label="@string/title_item_list"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
         <activity
             android:name=".ItemDetailActivity"
             android:label=" "
@@ -51,18 +53,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.argentruck.argentruck_partner.MainActivity" />
         </activity>
-        <activity
-            android:name=".RegisterActivity"
-            android:label="@string/app_name">
-        </activity>
-        <activity
-            android:name=".InitialActivity"
-            android:label="@string/app_name">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -81,6 +72,19 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.argentruck.argentruck_partner.ItemDetailActivity" />
+        </activity>
+
+        <activity
+            android:name=".RegisterActivity"
+            android:label="@string/app_name">
+        </activity>
+        <activity
+            android:name=".InitialActivity"
+            android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 
