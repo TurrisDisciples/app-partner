@@ -30,12 +30,13 @@ public class ClientsActivity extends AppCompatActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
+        Trip viaje = (Trip) getIntent().getSerializableExtra("viaje");
+
         // Instancia del ListView.
         mClientsList = (ListView) findViewById(R.id.clients_list);
 
         // Inicializar el adaptador con la fuente de datos.
-        clientsAdapter = new ClientsAdapter(this,
-                ClientsRepository.getInstance().getClients());
+        clientsAdapter = new ClientsAdapter(this, viaje.getClientList());
 
         //Relacionando la lista con el adaptador
         mClientsList.setAdapter(clientsAdapter);
