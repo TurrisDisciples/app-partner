@@ -1,6 +1,7 @@
 package com.argentruck.argentruck_partner;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -15,6 +16,7 @@ public class ClientsActivity extends AppCompatActivity {
 
     private ListView mClientsList;
     private ClientsAdapter clientsAdapter;
+    private Trip viaje;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +32,7 @@ public class ClientsActivity extends AppCompatActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
-        Trip viaje = (Trip) getIntent().getSerializableExtra("viaje");
+        viaje = (Trip) getIntent().getSerializableExtra("viaje");
 
         // Instancia del ListView.
         mClientsList = (ListView) findViewById(R.id.clients_list);
@@ -64,8 +66,11 @@ public class ClientsActivity extends AppCompatActivity {
 
         switch (item.getItemId()) {
             case R.id.map:
-                Intent intent = new Intent(ClientsActivity.this, MapsActivity.class);
+                String direction = viaje.getDestino().replace(" ", "+");
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("geo:<0>,<0>?q=" + direction));
                 startActivity(intent);
+//                Intent intent = new Intent(ClientsActivity.this, MapsActivity.class);
+//                startActivity(intent);
                 return true;
 
             default:
@@ -73,14 +78,4 @@ public class ClientsActivity extends AppCompatActivity {
         }
 
     }
-
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//
-//        if (item.getItemId() == android.R.id.home) {
-//            finish();
-//            return true;
-//        }
-//        return false;
-//    }
 }
