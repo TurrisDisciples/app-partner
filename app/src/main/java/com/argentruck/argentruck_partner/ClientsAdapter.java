@@ -37,21 +37,21 @@ public class ClientsAdapter extends ArrayAdapter<Client> {
             holder = new ViewHolder();
             holder.avatar = (ImageView) convertView.findViewById(R.id.iv_avatar);
             holder.name = (TextView) convertView.findViewById(R.id.name);
-            holder.title = (TextView) convertView.findViewById(R.id.title);
-            holder.company = (TextView) convertView.findViewById(R.id.tv_company);
+            holder.telefono = (TextView) convertView.findViewById(R.id.telefono);
+            holder.capacidadContratada = (TextView) convertView.findViewById(R.id.capacidad);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
 
         // Client actual.
-        Client Client = getItem(position);
+        Client cliente = getItem(position);
 
         // Setup.
-        holder.name.setText(Client.getName());
-        holder.title.setText(Client.getTitle());
-        holder.company.setText(Client.getCompany());
-        Glide.with(getContext()).load(Client.getImage()).into(holder.avatar);
+        holder.name.setText(cliente.getNombreYApellido());
+        holder.telefono.setText(cliente.getTelefono());
+        holder.capacidadContratada.setText(cliente.getCapacidadContratada());
+        Glide.with(getContext()).load(cliente.getImagen()).into(holder.avatar);
 
         return convertView;
     }
@@ -59,7 +59,7 @@ public class ClientsAdapter extends ArrayAdapter<Client> {
     static class ViewHolder {
         ImageView avatar;
         TextView name;
-        TextView title;
-        TextView company;
+        TextView telefono;
+        TextView capacidadContratada;
     }
 }

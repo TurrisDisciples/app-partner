@@ -1,99 +1,97 @@
 package com.argentruck.argentruck_partner;
 
 
-import java.util.UUID;
+import java.io.Serializable;
 
-public class Client {
-    private String mId;
-    private String mName;
-    private String mTitle;
-    private String mCompany;
-    private String mCapacidad;
-    private String mFecha;
-    private String origen;
-    private String destino;
-    private int mImage;
+public class Client implements Serializable {
 
-    public Client(String name, String title, String company, int image) {
-        mId = UUID.randomUUID().toString();
-        mName = name;
-        mTitle = title;
-        mCompany = company;
-        mImage = image;
-        origen = name;
-        destino = title;
-        mCapacidad = company;
-        mFecha = "10/25/2016";
+    private String id;
+    private String nombreYApellido;
+    private String telefono;
+    private String direccion;
+    private String mail;
+    private String capacidadContratada;
+    private int imagen;
+
+    public Client(String id, String nombreYApellido, String telefono, String direccion, String mail, String capacidadContratada, int imagen) {
+        this.id = id;
+        this.nombreYApellido = nombreYApellido;
+        this.telefono = telefono;
+        this.direccion = direccion;
+        this.mail = mail;
+        this.capacidadContratada = capacidadContratada;
+        this.imagen = imagen;
     }
 
     public String getId() {
-        return mId;
+        return id;
     }
 
-    public void setId(String mId) {
-        this.mId = mId;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public String getName() {
-        return mName;
+    public String getNombreYApellido() {
+        return nombreYApellido;
     }
 
-    public void setName(String mName) {
-        this.mName = mName;
+    public void setNombreYApellido(String nombreYApellido) {
+        this.nombreYApellido = nombreYApellido;
     }
 
-    public String getTitle() {
-        return mTitle;
+    public String getTelefono() {
+        return telefono;
     }
 
-    public void setTitle(String title) {
-        this.mTitle = title;
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
     }
 
-    public String getCompany() {
-        return mCompany;
+    public String getDireccion() {
+        return direccion;
     }
 
-    public void setCompany(String mCompany) {
-        this.mCompany = mCompany;
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
     }
 
-    public int getImage() {
-        return mImage;
+    public String getMail() {
+        return mail;
     }
 
-    public void setImage(int mImage) {
-        this.mImage = mImage;
+    public void setMail(String mail) {
+        this.mail = mail;
     }
 
-    public void setCapacidad(String capacidad) {
-        mCapacidad = capacidad;
+    public String getCapacidadContratada() {
+        return capacidadContratada;
     }
 
-    public String getCapacidad() {
-        return mCapacidad;
+    public void setCapacidadContratada(String capacidadContratada) {
+        this.capacidadContratada = capacidadContratada;
     }
 
-    public void setFecha(String fecha) {
-        mFecha = fecha;
+    public int getImagen() {
+        return imagen;
     }
 
-    public String getFecha() {
-        return mFecha;
+    public void setImagen(int imagen) {
+        this.imagen = imagen;
     }
 
     @Override
     public String toString() {
-        return "Lead{" +
-                "ID='" + mId + '\'' +
-                ", Compañía='" + mCompany + '\'' +
-                ", Nombre='" + mName + '\'' +
-                ", Cargo='" + mTitle + '\'' +
-                ", Origen='" + origen + '\'' +
-                ", Destino='" + destino + '\'' +
-                ", Capacidad='" + mCapacidad+ '\'' +
-                ", Fecha='" + mFecha+ '\'' +
-                '}';
+        return "le erraste";
+//        return "Lead{" +
+//                "ID='" + mId + '\'' +
+//                ", Compañía='" + mCompany + '\'' +
+//                ", Nombre='" + mName + '\'' +
+//                ", Cargo='" + mTitle + '\'' +
+//                ", Origen='" + origen + '\'' +
+//                ", Destino='" + destino + '\'' +
+//                ", Capacidad='" + mCapacidad+ '\'' +
+//                ", Fecha='" + mFecha+ '\'' +
+//                '}';
     }
 }
 

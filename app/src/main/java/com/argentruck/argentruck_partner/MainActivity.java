@@ -35,6 +35,8 @@ public class MainActivity extends AppCompatActivity
 
     private ListView mTripsList;
     private TripsAdapter tripsAdapter;
+    private List<Integer> listaDeImagenes;
+    private List<Trip> viajes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +63,7 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        setearImagenes();
         getTravelsInfo();
 
         // Instancia del ListView.
@@ -78,6 +81,7 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 Intent intent = new Intent(MainActivity.this, ClientsActivity.class);
+                intent.putExtra("viaje", viajes.get(position));
                 startActivity(intent);
             }
         });
@@ -86,7 +90,7 @@ public class MainActivity extends AppCompatActivity
     public void getTravelsInfo() {
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url = "http://192.168.0.5:3000/partners/myTravels?email=seba@live.com";
+        String url = "http://192.168.0.19:3000/partners/myTravels?email=seba@live.com";
 
         final Context context = getApplicationContext();
 
@@ -95,11 +99,11 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onResponse(JSONArray response) {
 //                // Inicializar el adaptador con la fuente de datos.
+                Toast.makeText(context, response.toString(), Toast.LENGTH_LONG).show();
                 tripsAdapter = new TripsAdapter(context, procesarResponse(response));
 //
 //                //Relacionando la lista con el adaptador
                 mTripsList.setAdapter(tripsAdapter);
-                Toast.makeText(context, response.toString(), Toast.LENGTH_LONG).show();
             }
         }, new Response.ErrorListener() {
             @Override
@@ -113,24 +117,40 @@ public class MainActivity extends AppCompatActivity
 
     public List<Trip> procesarResponse(JSONArray response) {
         List<Trip> viajes = new ArrayList<>();
+        List<Client> client_list = new ArrayList<>();
         JSONObject trip = new JSONObject();
+        JSONArray clients_registered;
+        JSONObject client_data;
+        JSONObject register_data;
+        String capacidad;
+        Client client;
         for(int i  = 0; i < response.length(); i++) {
             try {
-                trip = (JSONObject) response.get(i);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            try {
-                viajes.add(new Trip(trip.getString("_id") ,
+                trip = response.getJSONObject(i);
+                clients_registered = trip.getJSONArray("registers");
+                for(int j = 0; j < clients_registered.length(); j++) {
+                    register_data = clients_registered.getJSONObject(j);
+                    capacidad = register_data.getString("capacity");
+                    client_data = register_data.getJSONObject("userId");
+                    client_list.add(new Client(client_data.getString("_id"),
+                                               client_data.getString("nombre") + " " + client_data.getString("apellido"),
+                                               client_data.getString("telefono"),
+                                               client_data.getString("direccion"),
+                                               client_data.getString("email"),
+                                               capacidad, listaDeImagenes.get(j)));
+
+                }
+                viajes.add(new Trip(trip.getString("_id"),
                                     trip.getString("origin"),
                                     trip.getString("destiny"),
                                     trip.getString("capMax"),
-                                    trip.getString("date")));
+                                    trip.getString("date"),
+                                    client_list));
             } catch (JSONException e) {
                 e.printStackTrace();
             }
         }
-
+        this.viajes = viajes;
         return viajes;
 
     }
@@ -164,6 +184,19 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    public void setearImagenes() {
+        listaDeImagenes = new ArrayList<>();
+        listaDeImagenes.add(R.drawable.lead_photo_1);
+        listaDeImagenes.add(R.drawable.lead_photo_2);
+        listaDeImagenes.add(R.drawable.lead_photo_3);
+        listaDeImagenes.add(R.drawable.lead_photo_4);
+        listaDeImagenes.add(R.drawable.lead_photo_5);
+        listaDeImagenes.add(R.drawable.lead_photo_6);
+        listaDeImagenes.add(R.drawable.lead_photo_7);
+        listaDeImagenes.add(R.drawable.lead_photo_8);
+        listaDeImagenes.add(R.drawable.lead_photo_9);
     }
 
 //    public void getIP() {
