@@ -5,6 +5,11 @@
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Contraseña</string>
     <string name="action_sign_in">Iniciar Sesion</string>
+    <string name="prompt_name">Nombre</string>
+    <string name="prompt_surname">Apellido</string>
+    <string name="prompt_direccion">Direccion</string>
+    <string name="prompt_cbu">CBU</string>
+    <string name="prompt_telephone">Telefono</string>
     <string name="action_register">Crear Cuenta</string>
     <string name="action_sign_in_short">Iniciar Sesion</string>
     <string name="error_invalid_email">Direccion de email invalida</string>
