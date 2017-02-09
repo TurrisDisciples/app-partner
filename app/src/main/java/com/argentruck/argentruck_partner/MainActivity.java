@@ -90,7 +90,7 @@ public class MainActivity extends AppCompatActivity
     public void getTravelsInfo() {
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url = "http://192.168.0.19:3000/partners/myTravels?email=seba@live.com";
+        String url = "http://192.168.43.140:3000/partners/myTravels?email=seba@live.com";
 
         final Context context = getApplicationContext();
 

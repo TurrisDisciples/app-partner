@@ -2,24 +2,15 @@ package com.argentruck.argentruck_partner;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
-import android.support.v7.widget.Toolbar;
-import android.view.View;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
-
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 /**
  * An activity representing a single Item detail screen. This
@@ -27,16 +18,23 @@ import org.json.JSONObject;
  * item details are presented side-by-side with a list of items
  * in a {@link ItemListActivity}.
  */
-public class ItemDetailActivity extends AppCompatActivity {
+public class ItemDetailActivity extends AppCompatActivity implements AppBarLayout.OnOffsetChangedListener {
+
+    private Trip viaje;
+    private FloatingActionButton fab;
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item_detail);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.detail_toolbar);
+        toolbar = (Toolbar) findViewById(R.id.detail_toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        AppBarLayout appBarLayout = (AppBarLayout) findViewById(R.id.app_bar);
+        appBarLayout.addOnOffsetChangedListener(this);
+
+        fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -45,11 +43,21 @@ public class ItemDetailActivity extends AppCompatActivity {
             }
         });
 
+        viaje = (Trip) getIntent().getSerializableExtra("viaje");
+
         // Show the Up button in the action bar.
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
+
+        final TextView origenField = (TextView) findViewById(R.id.origenField);
+        final TextView destinoField = (TextView) findViewById(R.id.destinoField);
+
+        origenField.setText(viaje.getOrigen());
+        destinoField.setText(viaje.getDestino());
+
+
 
         // savedInstanceState is non-null when there is fragment state
         // saved from previous configurations of this activity
@@ -73,7 +81,7 @@ public class ItemDetailActivity extends AppCompatActivity {
                     .commit();
         }
 
-        getTripDetails();
+//        getTripDetails();
     }
 
     @Override
@@ -92,30 +100,42 @@ public class ItemDetailActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-
-    private void getTripDetails() {
-        final TextView mTextView = (TextView) findViewById(R.id.origen);
-        // Instantiate the RequestQueue.
-        RequestQueue queue = Volley.newRequestQueue(this);
-        String url = "http://ip.jsontest.com/";
-
-        JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.GET, url,
-                null, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                try {
-                    mTextView.setText(response.get("ip").toString());
-                } catch (JSONException e) {
-
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                mTextView.setText("That didn't work!");
-            }
-        });
-        // Add the request to the RequestQueue.
-        queue.add(jsObjRequest);
+    @Override
+    public void onOffsetChanged(AppBarLayout appBarLayout, int offset)
+    {
+        if (offset == 0)
+        {
+            fab.setVisibility(View.VISIBLE);
+        }
+        else
+        {
+            fab.setVisibility(View.INVISIBLE);
+        }
     }
+
+
+//    private void getTripDetails() {
+//        // Instantiate the RequestQueue.
+//        RequestQueue queue = Volley.newRequestQueue(this);
+//        String url = "http://ip.jsontest.com/";
+//
+//        JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.GET, url,
+//                null, new Response.Listener<JSONObject>() {
+//            @Override
+//            public void onResponse(JSONObject response) {
+//                try {
+//                    mTextView.setText(response.get("ip").toString());
+//                } catch (JSONException e) {
+//
+//                }
+//            }
+//        }, new Response.ErrorListener() {
+//            @Override
+//            public void onErrorResponse(VolleyError error) {
+//                mTextView.setText("That didn't work!");
+//            }
+//        });
+//        // Add the request to the RequestQueue.
+//        queue.add(jsObjRequest);
+//    }
 }

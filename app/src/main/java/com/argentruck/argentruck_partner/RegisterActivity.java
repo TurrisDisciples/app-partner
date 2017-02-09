@@ -17,8 +17,6 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -41,7 +39,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         mEmailView = (EditText) findViewById(R.id.email);
         mContrasenaView = (EditText) findViewById(R.id.password);
-        mNombreView = (EditText) findViewById(R.id.name);
+        mNombreView = (EditText) findViewById(R.id.destino);
         mApellidoView = (EditText) findViewById(R.id.surname);
         mDireccionView = (EditText) findViewById(R.id.address);
         mCBUView = (EditText) findViewById(R.id.cbu);

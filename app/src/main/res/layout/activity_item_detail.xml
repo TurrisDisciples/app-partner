@@ -26,25 +26,34 @@
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="1">
 
                 <LinearLayout
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1">
+                    android:layout_height="65dp"></LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:layout_weight="0"
+                    android:paddingStart="20dp">
 
                     <TextView
                         android:text="@string/origen"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/origen"
-                        android:layout_weight="1" />
+                        android:layout_weight="0"
+                        android:singleLine="true"
+                        android:ellipsize="none"
+                        android:minWidth="60dp" />
 
                     <TextView
                         android:text="@string/origen"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/origenField"
                         android:layout_weight="1" />
@@ -54,19 +63,22 @@
                 <LinearLayout
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1">
+                    android:layout_height="56dp"
+                    android:paddingStart="20dp">
 
                     <TextView
                         android:text="@string/destino"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/name"
-                        android:layout_weight="1" />
+                        android:id="@+id/destino"
+                        android:layout_weight="0"
+                        android:minWidth="60dp"
+                        android:singleLine="true"
+                        android:ellipsize="none" />
 
                     <TextView
                         android:text="@string/destino"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/destinoField"
                         android:layout_weight="1" />
@@ -85,14 +97,6 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <android.support.v4.widget.NestedScrollView
-        android:id="@+id/item_detail_container"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" >
-
-    </android.support.v4.widget.NestedScrollView>
-
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"
@@ -102,5 +106,13 @@
         app:layout_anchor="@+id/item_detail_container"
         app:layout_anchorGravity="top|end"
         app:srcCompat="@android:drawable/stat_notify_chat" />
+
+    <android.support.v4.widget.NestedScrollView
+        android:id="@+id/item_detail_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" >
+
+    </android.support.v4.widget.NestedScrollView>
 
 </android.support.design.widget.CoordinatorLayout>
