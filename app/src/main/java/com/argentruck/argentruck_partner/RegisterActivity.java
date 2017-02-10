@@ -13,15 +13,11 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -59,7 +55,22 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private boolean checkValidData() {
-        //TODO: verificar que los valores ingresados para registrarse sean correctos
+        if (!(mEmailView.getText().toString().trim()).contains("@")) {
+            Toast.makeText(getApplicationContext(), "Email Incorrecto", Toast.LENGTH_LONG).show();
+            return false;
+        }
+        if ((mContrasenaView.getText().toString().trim()).length() < 4) {
+            Toast.makeText(getApplicationContext(), "La contraseña es muy corta", Toast.LENGTH_LONG).show();
+            return false;
+        }
+        if ((mCBUView.getText().toString().trim()).length()== 0) {
+            Toast.makeText(getApplicationContext(), "El CBU es obligatorio", Toast.LENGTH_LONG).show();
+            return false;
+        }
+        if ((mTelefonoView.getText().toString().trim()).length() == 0) {
+            Toast.makeText(getApplicationContext(), "El telefono es obligatorio", Toast.LENGTH_LONG).show();
+            return false;
+        }
         return true;
     }
 
@@ -67,20 +78,39 @@ public class RegisterActivity extends AppCompatActivity {
 
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url = "http://localhost:3000/partners/";
+        //TODO: Acomodar esta ip!!!!!
+        final String url = "http://192.168.0.27:3000/partners/";
 
         final Context context = getApplicationContext();
 
-        JsonArrayRequest jsObjRequest = new JsonArrayRequest(Request.Method.POST, url,
-                null, new Response.Listener<JSONArray>() {
+        JSONObject jsParam = new JSONObject();
+        JSONObject mRequestParams = new JSONObject();
+
+        try {
+            mRequestParams.put("email", mEmailView.getText().toString().trim());
+            mRequestParams.put("password", mContrasenaView.getText().toString().trim());
+            mRequestParams.put("nombre", mNombreView.getText().toString().trim());
+            mRequestParams.put("apellido", mApellidoView.getText().toString().trim());
+            mRequestParams.put("direccion", mDireccionView.getText().toString().trim());
+            mRequestParams.put("cbu", mCBUView.getText().toString().trim());
+            mRequestParams.put("telefono", mTelefonoView.getText().toString().trim());
+
+            jsParam.put("data", mRequestParams);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.POST, url,
+                jsParam, new Response.Listener<JSONObject>() {
             @Override
-            public void onResponse(JSONArray response) {
-                try {
-                    Toast.makeText(context, response.toString(), Toast.LENGTH_LONG).show();
+            public void onResponse(JSONObject response) {
+                if ((response.toString()).contains("created")) {
+                    Toast.makeText(context, "Cuenta creada correctamente", Toast.LENGTH_LONG).show();
                     Intent intentMain = new Intent(RegisterActivity.this, MainActivity.class );
                     startActivity(intentMain);
-                } catch (Exception e) {
-                    e.printStackTrace();
+                } else {
+                    Toast.makeText(context, response.toString(), Toast.LENGTH_LONG).show();
                 }
             }
         }, new Response.ErrorListener() {
@@ -88,21 +118,7 @@ public class RegisterActivity extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
                 Toast.makeText(context, error.toString(), Toast.LENGTH_LONG).show();
             }
-        }) {
-            @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> mRequestParams = new HashMap<>();
-                mRequestParams.put("email", mEmailView.getText().toString());
-                mRequestParams.put("password", mContrasenaView.getText().toString());
-                mRequestParams.put("nombre", mNombreView.getText().toString());
-                mRequestParams.put("apellido", mApellidoView.getText().toString());
-                mRequestParams.put("direccion", mDireccionView.getText().toString());
-                mRequestParams.put("cbu", mCBUView.getText().toString());
-                mRequestParams.put("telefono", mTelefonoView.getText().toString());
-
-                return mRequestParams;
-            }
-        };
+        });
         // Add the request to the RequestQueue.
         queue.add(jsObjRequest);
     }
