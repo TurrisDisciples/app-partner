@@ -108,6 +108,7 @@ public class RegisterActivity extends AppCompatActivity {
                 if ((response.toString()).contains("created")) {
                     Toast.makeText(context, "Cuenta creada correctamente", Toast.LENGTH_LONG).show();
                     Intent intentMain = new Intent(RegisterActivity.this, MainActivity.class );
+                    intentMain.putExtra("email", mEmailView.getText().toString().trim());
                     startActivity(intentMain);
                 } else {
                     Toast.makeText(context, response.toString(), Toast.LENGTH_LONG).show();

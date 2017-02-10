@@ -90,7 +90,7 @@ public class MainActivity extends AppCompatActivity
     public void getTravelsInfo() {
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url = "http://192.168.43.140:3000/partners/myTravels?email=seba@live.com";
+        String url = "http://192.168.0.27:3000/partners/myTravels?email=seba@live.com";
 
         final Context context = getApplicationContext();
 
@@ -172,9 +172,11 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.perfil) {
-            // Handle the camera action
+            //Intent intent = new Intent(MainActivity.this, PerfilActivity.class);
+            //startActivity(intent);
         } else if (id == R.id.sign_out) {
-
+            Intent intent = new Intent(MainActivity.this, InitialActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_send) {
@@ -198,30 +200,4 @@ public class MainActivity extends AppCompatActivity
         listaDeImagenes.add(R.drawable.lead_photo_8);
         listaDeImagenes.add(R.drawable.lead_photo_9);
     }
-
-//    public void getIP() {
-//        final TextView mTextView = (TextView) findViewById(R.id.textView2);
-//        // Instantiate the RequestQueue.
-//        RequestQueue queue = Volley.newRequestQueue(this);
-//        String url ="http://ip.jsontest.com/";
-//
-//        JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.GET, url,
-//                null, new Response.Listener<JSONObject>() {
-//            @Override
-//            public void onResponse(JSONObject response) {
-//                try {
-//                    mTextView.setText("Your IP is: "+ response.get("ip"));
-//                } catch (JSONException e) {
-//
-//                }
-//            }
-//        }, new Response.ErrorListener() {
-//            @Override
-//            public void onErrorResponse(VolleyError error) {
-//                mTextView.setText("That didn't work!");
-//            }
-//        });
-//        // Add the request to the RequestQueue.
-//        queue.add(jsObjRequest);
-//    }
 }
