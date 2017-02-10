@@ -48,7 +48,7 @@ public class ClientsActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 Intent intent = new Intent(ClientsActivity.this, ItemDetailActivity.class);
-                intent.putExtra(ItemDetailFragment.ARG_ITEM_ID, 1);
+                intent.putExtra("viaje", viaje);
                 startActivity(intent);
             }
         });

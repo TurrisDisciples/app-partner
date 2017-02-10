@@ -40,8 +40,7 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/prompt_email"
                     android:inputType="textEmailAddress"
-                    android:maxLines="1"
-                    android:singleLine="true" />
+                    android:maxLines="1" />
 
             </android.support.design.widget.TextInputLayout>
 
@@ -58,8 +57,7 @@
                     android:imeActionLabel="@string/action_sign_in_short"
                     android:imeOptions="actionUnspecified"
                     android:inputType="textPassword"
-                    android:maxLines="1"
-                    android:singleLine="true" />
+                    android:maxLines="1" />
 
             </android.support.design.widget.TextInputLayout>
 
@@ -69,7 +67,6 @@
                 android:inputType="textPersonName"
                 android:ems="10"
                 android:id="@+id/name"
-                android:singleLine="true"
                 android:hint="@string/prompt_name" />
 
             <EditText
@@ -78,7 +75,6 @@
                 android:inputType="textPersonName"
                 android:ems="10"
                 android:id="@+id/surname"
-                android:singleLine="true"
                 android:hint="@string/prompt_surname" />
 
             <EditText
@@ -87,7 +83,6 @@
                 android:inputType="textPostalAddress"
                 android:ems="10"
                 android:id="@+id/address"
-                android:singleLine="true"
                 android:hint="@string/prompt_direccion" />
 
             <EditText
@@ -96,7 +91,6 @@
                 android:inputType="number"
                 android:ems="10"
                 android:id="@+id/cbu"
-                android:singleLine="true"
                 android:hint="@string/prompt_cbu" />
 
             <EditText
@@ -105,7 +99,6 @@
                 android:inputType="phone"
                 android:ems="10"
                 android:id="@+id/telephone"
-                android:singleLine="true"
                 android:hint="@string/prompt_telephone" />
 
             <Button
@@ -115,7 +108,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="@string/action_register"
-                android:onClick="changeToMainActivity"
                 android:textStyle="bold" />
 
 
