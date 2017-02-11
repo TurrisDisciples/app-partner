@@ -75,7 +75,6 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void register() {
-
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(this);
         //TODO: Acomodar esta ip!!!!!
@@ -106,18 +105,18 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onResponse(JSONObject response) {
                 if ((response.toString()).contains("created")) {
-                    Toast.makeText(context, "Cuenta creada correctamente", Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, "Cuenta creada correctamente", Toast.LENGTH_SHORT).show();
                     Intent intentMain = new Intent(RegisterActivity.this, MainActivity.class );
                     intentMain.putExtra("email", mEmailView.getText().toString().trim());
                     startActivity(intentMain);
                 } else {
-                    Toast.makeText(context, response.toString(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, response.toString(), Toast.LENGTH_SHORT).show();
                 }
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(context, error.toString(), Toast.LENGTH_LONG).show();
+                Toast.makeText(context, error.toString(), Toast.LENGTH_SHORT).show();
             }
         });
         // Add the request to the RequestQueue.

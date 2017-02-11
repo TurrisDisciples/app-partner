@@ -26,10 +26,12 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
-    <string name="get_ip">Get your IP</string>
     <string name="title_item_list">Items</string>
     <string name="title_item_detail">Item Detail</string>
     <string name="origen">Origen:</string>
     <string name="destino">Destino:</string>
     <string name="title_activity_maps">Map</string>
+    <string name="crear_viaje">Crear nuevo viaje</string>
+    <string name="capacidad_maxima">Capacidad Maxima:</string>
+    <string name="fecha_viaje">Fecha (aaaa-mm-dd):</string>
 </resources>

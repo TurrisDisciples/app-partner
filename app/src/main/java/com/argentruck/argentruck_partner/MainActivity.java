@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity
     private TripsAdapter tripsAdapter;
     private List<Integer> listaDeImagenes;
     private List<Trip> viajes;
+    private String email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +51,8 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, NewTripActivity.class);
+                //TODO: poner el email que usa el usuario
+                //intent.putExtra("email", "seba@live.com");
                 startActivity(intent);
             }
         });
@@ -98,11 +101,11 @@ public class MainActivity extends AppCompatActivity
                 null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
-//                // Inicializar el adaptador con la fuente de datos.
-                Toast.makeText(context, response.toString(), Toast.LENGTH_LONG).show();
+                // Inicializar el adaptador con la fuente de datos.
+                //Toast.makeText(context, response.toString(), Toast.LENGTH_LONG).show();
                 tripsAdapter = new TripsAdapter(context, procesarResponse(response));
-//
-//                //Relacionando la lista con el adaptador
+
+                //Relacionando la lista con el adaptador
                 mTripsList.setAdapter(tripsAdapter);
             }
         }, new Response.ErrorListener() {
@@ -172,10 +175,12 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.perfil) {
+            Toast.makeText(getApplicationContext(), "Estoy en perfil", Toast.LENGTH_SHORT).show();
             //Intent intent = new Intent(MainActivity.this, PerfilActivity.class);
             //startActivity(intent);
         } else if (id == R.id.sign_out) {
-            Intent intent = new Intent(MainActivity.this, InitialActivity.class);
+            Toast.makeText(getApplicationContext(), "Cerrando Sesion", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this, InitialActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_share) {
 
