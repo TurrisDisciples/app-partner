@@ -46,13 +46,16 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        //Se obtiene el email con el que se inicio sesion/registro
+        Bundle bundle = getIntent().getExtras();
+        email = bundle.getString("email");
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, NewTripActivity.class);
-                //TODO: poner el email que usa el usuario
-                //intent.putExtra("email", "seba@live.com");
+                intent.putExtra("email", email);
                 startActivity(intent);
             }
         });
@@ -93,7 +96,8 @@ public class MainActivity extends AppCompatActivity
     public void getTravelsInfo() {
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url = "http://192.168.0.27:3000/partners/myTravels?email=seba@live.com";
+        //TODO: Acomodar esta IP
+        String url = "http://192.168.0.27:3000/partners/myTravels?email=" + email;
 
         final Context context = getApplicationContext();
 
@@ -176,11 +180,8 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.perfil) {
             Toast.makeText(getApplicationContext(), "Estoy en perfil", Toast.LENGTH_SHORT).show();
-            //Intent intent = new Intent(this, PerfilActivity.class);
+            //Intent intent new Intent(this, PerfilActivity.class);
             //startActivity(intent);
-        } else if (id == R.id.mis_viajes) {
-            Intent intent = new Intent(this, MainActivity.class);
-            startActivity(intent);
         } else if (id == R.id.sign_out) {
             Toast.makeText(getApplicationContext(), "Cerrando Sesion", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(this, InitialActivity.class);

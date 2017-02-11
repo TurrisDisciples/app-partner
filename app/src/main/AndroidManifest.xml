@@ -44,7 +44,9 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.argentruck.argentruck_partner.ClientsActivity" />
         </activity>
-        <activity android:name=".NewTripActivity" />
+        <activity
+            android:name=".NewTripActivity"
+            android:label="Nuevos Viajes" />
         <activity
             android:name=".ClientsActivity"
             android:label="@string/clientes"

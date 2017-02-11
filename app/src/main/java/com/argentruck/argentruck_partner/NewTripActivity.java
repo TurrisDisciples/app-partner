@@ -1,9 +1,9 @@
 package com.argentruck.argentruck_partner;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -32,8 +32,8 @@ public class NewTripActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_trip);
 
-        //Bundle bundle = getIntent().getExtras();
-        //email = bundle.getString("email");
+        Bundle bundle = getIntent().getExtras();
+        email = bundle.getString("email");
 
         mOrigen = (EditText) findViewById(R.id.origen);
         mDestino = (EditText) findViewById(R.id.destino);
@@ -44,9 +44,40 @@ public class NewTripActivity extends AppCompatActivity {
         mRegisterButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                registrarNuevoViaje();
+                if (checkValidData()) {
+                    registrarNuevoViaje();
+                }
             }
         });
+    }
+
+    private boolean checkValidData() {
+        String origen = mOrigen.getText().toString().trim();
+        String destino = mDestino.getText().toString().trim();
+        String capacidad = mCapacidad.getText().toString().trim();
+        String fecha = mFecha.getText().toString().trim();
+
+        if (TextUtils.isEmpty(origen)) {
+            Toast.makeText(getApplicationContext(), "Este campo es obligatorio", Toast.LENGTH_LONG).show();
+            mOrigen.requestFocus();
+            return false;
+        }
+        if (TextUtils.isEmpty(destino)) {
+            Toast.makeText(getApplicationContext(), "Este campo es obligatorio", Toast.LENGTH_LONG).show();
+            mDestino.requestFocus();
+            return false;
+        }
+        if (TextUtils.isEmpty(capacidad)) {
+            Toast.makeText(getApplicationContext(), "Este campo es obligatorio y mayor a 0", Toast.LENGTH_LONG).show();
+            mCapacidad.requestFocus();
+            return false;
+        }
+        if (TextUtils.isEmpty(fecha)) {
+            Toast.makeText(getApplicationContext(), "Este campo es obligatorio y con formato AAAA-MM-DD", Toast.LENGTH_LONG).show();
+            mFecha.requestFocus();
+            return false;
+        }
+        return true;
     }
 
     private void registrarNuevoViaje() {
@@ -61,7 +92,7 @@ public class NewTripActivity extends AppCompatActivity {
         JSONObject mRequestParams = new JSONObject();
 
         try {
-            mRequestParams.put("email", "seba@live.com");
+            mRequestParams.put("email", email);
             mRequestParams.put("origin", mOrigen.getText().toString().trim());
             mRequestParams.put("destiny", mDestino.getText().toString().trim());
             mRequestParams.put("capMax", mCapacidad.getText().toString().trim());

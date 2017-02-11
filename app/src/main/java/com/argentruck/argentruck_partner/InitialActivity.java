@@ -31,4 +31,6 @@ public class InitialActivity extends AppCompatActivity {
             }
         });
     }
+    @Override
+    public void onBackPressed() {}
 }
