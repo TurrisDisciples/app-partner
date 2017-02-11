@@ -176,8 +176,11 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.perfil) {
             Toast.makeText(getApplicationContext(), "Estoy en perfil", Toast.LENGTH_SHORT).show();
-            //Intent intent = new Intent(MainActivity.this, PerfilActivity.class);
+            //Intent intent = new Intent(this, PerfilActivity.class);
             //startActivity(intent);
+        } else if (id == R.id.mis_viajes) {
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
         } else if (id == R.id.sign_out) {
             Toast.makeText(getApplicationContext(), "Cerrando Sesion", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(this, InitialActivity.class);

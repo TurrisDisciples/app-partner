@@ -12,7 +12,6 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.argentruck.argentruck_partner.NewTripActivity">
 
-
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -46,8 +45,8 @@
         android:id="@+id/fecha" />
 
     <Button
+        android:text="@string/crear_viaje"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/crear_viaje"
         android:id="@+id/crear_viaje_button" />
 </LinearLayout>
