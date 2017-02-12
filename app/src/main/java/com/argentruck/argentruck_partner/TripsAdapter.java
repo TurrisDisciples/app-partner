@@ -59,7 +59,7 @@ public class TripsAdapter extends ArrayAdapter<Trip> {
 
         holder.inicial.setImageDrawable(drawable);
         holder.viaje.setText(viaje.getOrigen() + " - " + viaje.getDestino());
-        holder.capacidad.setText(viaje.getCapacidad());
+        holder.capacidad.setText(viaje.getCapacidad() + " tn");
         holder.fecha.setText(viaje.getFecha());
 
         return convertView;
