@@ -3,7 +3,6 @@ package com.argentruck.argentruck_partner;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -30,7 +29,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity
+public class ViajesSugeridosActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private ListView mTripsList;
@@ -42,7 +41,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_viajes_sugeridos);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -50,15 +49,15 @@ public class MainActivity extends AppCompatActivity
         Bundle bundle = getIntent().getExtras();
         email = bundle.getString("email");
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, NewTripActivity.class);
-                intent.putExtra("email", email);
-                startActivity(intent);
-            }
-        });
+//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(ViajesSugeridosActivity.this, NewTripActivity.class);
+//                intent.putExtra("email", email);
+//                startActivity(intent);
+//            }
+//        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -86,7 +85,7 @@ public class MainActivity extends AppCompatActivity
         mTripsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                Intent intent = new Intent(MainActivity.this, ItemDetailActivity.class);
+                Intent intent = new Intent(ViajesSugeridosActivity.this, ItemDetailActivity.class);
                 intent.putExtra("viaje", viajes.get(position));
                 startActivity(intent);
             }
@@ -97,7 +96,7 @@ public class MainActivity extends AppCompatActivity
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(this);
         //TODO: Acomodar esta IP
-        String url = "http://192.168.1.101:3000/partners/myTravels?email=" + email;
+        String url = "http://192.168.1.101:3000/partners/suggestedTravels";
 
         final Context context = getApplicationContext();
 
@@ -106,7 +105,7 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onResponse(JSONArray response) {
                 // Inicializar el adaptador con la fuente de datos.
-                //Toast.makeText(context, response.toString(), Toast.LENGTH_LONG).show();
+                Toast.makeText(context, response.toString(), Toast.LENGTH_LONG).show();
                 tripsAdapter = new TripsAdapter(context, procesarResponse(response));
 
                 //Relacionando la lista con el adaptador
@@ -195,10 +194,14 @@ public class MainActivity extends AppCompatActivity
             Toast.makeText(getApplicationContext(), "Cerrando Sesion", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(this, InitialActivity.class);
             startActivity(intent);
-        } else if (id == R.id.viajes_sugeridos) {
-            Intent intent = new Intent(this, ViajesSugeridosActivity.class);
+        } else if (id == R.id.home) {
+            Intent intent = new Intent(this, MainActivity.class);
             intent.putExtra("email", email);
             startActivity(intent);
+        } else if (id == R.id.viajes_sugeridos) {
+//            Toast.makeText(getApplicationContext(), "Cerrando Sesion", Toast.LENGTH_SHORT).show();
+//            Intent intent = new Intent(this, ViajesSugeridosActivity.class);
+//            startActivity(intent);
         } else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_send) {
