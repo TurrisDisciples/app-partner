@@ -84,7 +84,7 @@ public class NewTripActivity extends AppCompatActivity {
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(this);
         //TODO: Acomodar esta ip!!!!!
-        final String url = "http://192.168.0.27:3000/partners/travel";
+        final String url = "http://192.168.1.103:3000/partners/travel";
 
         final Context context = getApplicationContext();
 

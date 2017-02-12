@@ -23,18 +23,15 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".LoginActivity"
-            android:label="@string/app_name">
-        </activity>
+            android:label="@string/app_name"></activity>
         <activity
             android:name=".MainActivity"
             android:label="@string/tus_viajes"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".ItemListActivity"
             android:label="@string/title_item_list"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".ItemDetailActivity"
             android:label=" "
@@ -46,7 +43,8 @@
         </activity>
         <activity
             android:name=".NewTripActivity"
-            android:label="Nuevos Viajes" />
+            android:label="Nuevos Viajes" >
+        </activity>
         <activity
             android:name=".ClientsActivity"
             android:label="@string/clientes"
@@ -67,6 +65,7 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
+
         <activity
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps"
@@ -75,18 +74,21 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.argentruck.argentruck_partner.ItemDetailActivity" />
         </activity>
-
         <activity
             android:name=".RegisterActivity"
-            android:label="@string/app_name">
-        </activity>
+            android:label="@string/app_name"></activity>
         <activity
             android:name=".InitialActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".PerfilActivity"
+            android:label="Mi Perfil" >
         </activity>
     </application>
 

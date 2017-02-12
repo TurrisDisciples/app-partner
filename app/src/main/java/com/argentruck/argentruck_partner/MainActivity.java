@@ -97,7 +97,7 @@ public class MainActivity extends AppCompatActivity
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(this);
         //TODO: Acomodar esta IP
-        String url = "http://192.168.0.27:3000/partners/myTravels?email=" + email;
+        String url = "http://192.168.1.103:3000/partners/myTravels?email=" + email;
 
         final Context context = getApplicationContext();
 
@@ -179,17 +179,17 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.perfil) {
-            Toast.makeText(getApplicationContext(), "Estoy en perfil", Toast.LENGTH_SHORT).show();
-            //Intent intent new Intent(this, PerfilActivity.class);
-            //startActivity(intent);
+            Intent intent = new Intent(this, PerfilActivity.class);
+            intent.putExtra("email", email);
+            startActivity(intent);
         } else if (id == R.id.sign_out) {
             Toast.makeText(getApplicationContext(), "Cerrando Sesion", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(this, InitialActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_share) {
-
+            Toast.makeText(getApplicationContext(), "Compartir", Toast.LENGTH_SHORT).show();
         } else if (id == R.id.nav_send) {
-
+            Toast.makeText(getApplicationContext(), "Enviar", Toast.LENGTH_SHORT).show();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
