@@ -35,15 +35,33 @@
                 android:textSize="18sp"
                 android:textAllCaps="true" />
 
-            <TextView
-                android:id="@+id/capacidad"
+            <LinearLayout
+                android:orientation="horizontal"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Capacidad"
-                android:textAppearance="?attr/textAppearanceListItem"
-                tools:text="Blue Insurances Ltd"
-                android:textSize="15sp"
-                android:textColor="#444" />
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/capacidad_nombre"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Capacidad: "
+                    android:textAppearance="?attr/textAppearanceListItem"
+                    android:textSize="15sp"
+                    android:textColor="#444" />
+
+                <TextView
+                    android:id="@+id/capacidad"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Capacidad"
+                    android:textAppearance="?attr/textAppearanceListItem"
+                    tools:text="Blue Insurances Ltd"
+                    android:textSize="15sp"
+                    android:textColor="#444"
+                    android:layout_weight="1" />
+
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/fecha"

@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity
         mTripsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                Intent intent = new Intent(MainActivity.this, ClientsActivity.class);
+                Intent intent = new Intent(MainActivity.this, ItemDetailActivity.class);
                 intent.putExtra("viaje", viajes.get(position));
                 startActivity(intent);
             }
@@ -115,12 +115,21 @@ public class MainActivity extends AppCompatActivity
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                Toast.makeText(context, "Error de conexion", Toast.LENGTH_LONG).show();
                 Toast.makeText(context, error.toString(), Toast.LENGTH_LONG).show();
             }
         });
         // Add the request to the RequestQueue.
         queue.add(jsObjRequest);
     }
+
+//    @Override
+//    public void onDownScroll(){
+//        if( menuActualizado){
+//            get(null);
+//        }
+//        Toast.makeText(getApplicationContext(), "Carpeta actualizada", Toast.LENGTH_LONG).show();
+//    }
 
     public List<Trip> procesarResponse(JSONArray response) {
         List<Trip> viajes = new ArrayList<>();

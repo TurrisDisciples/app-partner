@@ -1,15 +1,18 @@
 package com.argentruck.argentruck_partner;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 /**
@@ -23,6 +26,9 @@ public class ItemDetailActivity extends AppCompatActivity implements AppBarLayou
     private Trip viaje;
     private FloatingActionButton fab;
     private Toolbar toolbar;
+    private ListView mClientsList;
+    private ClientsAdapter clientsAdapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,14 +40,14 @@ public class ItemDetailActivity extends AppCompatActivity implements AppBarLayou
         AppBarLayout appBarLayout = (AppBarLayout) findViewById(R.id.app_bar);
         appBarLayout.addOnOffsetChangedListener(this);
 
-        fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own detail action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+//        fab = (FloatingActionButton) findViewById(R.id.fab);
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Snackbar.make(view, "Replace with your own detail action", Snackbar.LENGTH_LONG)
+//                        .setAction("Action", null).show();
+//            }
+//        });
 
         viaje = (Trip) getIntent().getSerializableExtra("viaje");
 
@@ -68,49 +74,95 @@ public class ItemDetailActivity extends AppCompatActivity implements AppBarLayou
         //
         // http://developer.android.com/guide/components/fragments.html
         //
-        if (savedInstanceState == null) {
-            // Create the detail fragment and add it to the activity
-            // using a fragment transaction.
-            Bundle arguments = new Bundle();
-            arguments.putString(ItemDetailFragment.ARG_ITEM_ID,
-                    getIntent().getStringExtra(ItemDetailFragment.ARG_ITEM_ID));
-            ItemDetailFragment fragment = new ItemDetailFragment();
-            fragment.setArguments(arguments);
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.item_detail_container, fragment)
-                    .commit();
-        }
+//        if (savedInstanceState == null) {
+//            // Create the detail fragment and add it to the activity
+//            // using a fragment transaction.
+//            Bundle arguments = new Bundle();
+//            arguments.putString(ItemDetailFragment.ARG_ITEM_ID,
+//                    getIntent().getStringExtra(ItemDetailFragment.ARG_ITEM_ID));
+//            ItemDetailFragment fragment = new ItemDetailFragment();
+//            fragment.setArguments(arguments);
+//            getSupportFragmentManager().beginTransaction()
+//                    .add(R.id.item_detail_container, fragment)
+//                    .commit();
+//        }
+
+//        viaje = (Trip) getIntent().getSerializableExtra("viaje");
+
+        // Instancia del ListView.
+        mClientsList = (ListView) findViewById(R.id.clients_list);
+
+        // Inicializar el adaptador con la fuente de datos.
+        clientsAdapter = new ClientsAdapter(this, viaje.getClientList());
+
+        //Relacionando la lista con el adaptador
+        mClientsList.setAdapter(clientsAdapter);
+
+        // Eventos
+        mClientsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                Intent intent = new Intent(ItemDetailActivity.this, ClientsActivity.class);
+                intent.putExtra("viaje", viaje);
+                startActivity(intent);
+            }
+        });
 
 //        getTripDetails();
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == android.R.id.home) {
-            // This ID represents the Home or Up button. In the case of this
-            // activity, the Up button is shown. For
-            // more details, see the Navigation pattern on Android Design:
-            //
-            // http://developer.android.com/design/patterns/navigation.html#up-vs-back
-            //
-            navigateUpTo(new Intent(this, ItemListActivity.class));
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        int id = item.getItemId();
+//        if (id == android.R.id.home) {
+//            // This ID represents the Home or Up button. In the case of this
+//            // activity, the Up button is shown. For
+//            // more details, see the Navigation pattern on Android Design:
+//            //
+//            // http://developer.android.com/design/patterns/navigation.html#up-vs-back
+//            //
+//            navigateUpTo(new Intent(this, ItemListActivity.class));
+//            return true;
+//        }
+//        return super.onOptionsItemSelected(item);
+//    }
 
     @Override
     public void onOffsetChanged(AppBarLayout appBarLayout, int offset)
     {
-        if (offset == 0)
-        {
-            fab.setVisibility(View.VISIBLE);
+//        if (offset == 0)
+//        {
+//            fab.setVisibility(View.VISIBLE);
+//        }
+//        else
+//        {
+//            fab.setVisibility(View.INVISIBLE);
+//        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(final Menu menu) {
+
+        getMenuInflater().inflate(R.menu.clients_menu_icons, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+            case R.id.map:
+                String direction = viaje.getDestino().replace(" ", "+");
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("geo:<0>,<0>?q=" + direction));
+                startActivity(intent);
+//                Intent intent = new Intent(ClientsActivity.this, MapsActivity.class);
+//                startActivity(intent);
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
         }
-        else
-        {
-            fab.setVisibility(View.INVISIBLE);
-        }
+
     }
 
 

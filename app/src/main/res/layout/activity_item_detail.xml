@@ -39,7 +39,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="56dp"
                     android:layout_weight="0"
-                    android:paddingStart="20dp">
+                    android:paddingStart="20dp"
+                    android:paddingLeft="20dp">
 
                     <TextView
                         android:text="@string/origen"
@@ -64,7 +65,8 @@
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="56dp"
-                    android:paddingStart="20dp">
+                    android:paddingStart="20dp"
+                    android:paddingLeft="20dp">
 
                     <TextView
                         android:text="@string/destino"
@@ -97,21 +99,32 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
+    <!--<android.support.design.widget.FloatingActionButton-->
+        <!--android:id="@+id/fab"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_gravity="center_vertical|start"-->
+        <!--android:layout_margin="@dimen/fab_margin"-->
+        <!--app:layout_anchor="@+id/item_detail_container"-->
+        <!--app:layout_anchorGravity="top|end"-->
+        <!--app:srcCompat="@android:drawable/stat_notify_chat" />-->
+
+
+    <ListView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical|start"
-        android:layout_margin="@dimen/fab_margin"
-        app:layout_anchor="@+id/item_detail_container"
-        app:layout_anchorGravity="top|end"
-        app:srcCompat="@android:drawable/stat_notify_chat" />
+        android:layout_centerHorizontal="true"
+        android:id="@+id/clients_list"
+        android:layout_alignParentTop="true"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:layout_marginTop="6dp" />
 
     <android.support.v4.widget.NestedScrollView
         android:id="@+id/item_detail_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" >
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:clipToPadding="false">
 
     </android.support.v4.widget.NestedScrollView>
 
