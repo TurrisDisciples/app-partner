@@ -87,6 +87,8 @@ public class ViajesSugeridosActivity extends AppCompatActivity
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 Intent intent = new Intent(ViajesSugeridosActivity.this, ItemDetailActivity.class);
                 intent.putExtra("viaje", viajes.get(position));
+                intent.putExtra("mostrar_fab", true);
+                intent.putExtra("email", email);
                 startActivity(intent);
             }
         });
@@ -96,7 +98,7 @@ public class ViajesSugeridosActivity extends AppCompatActivity
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(this);
         //TODO: Acomodar esta IP
-        String url = "http://192.168.1.101:3000/partners/suggestedTravels";
+        String url = "http://192.168.0.5:3000/partners/suggestedTravels";
 
         final Context context = getApplicationContext();
 
@@ -105,7 +107,7 @@ public class ViajesSugeridosActivity extends AppCompatActivity
             @Override
             public void onResponse(JSONArray response) {
                 // Inicializar el adaptador con la fuente de datos.
-                Toast.makeText(context, response.toString(), Toast.LENGTH_LONG).show();
+//                Toast.makeText(context, response.toString(), Toast.LENGTH_LONG).show();
                 tripsAdapter = new TripsAdapter(context, procesarResponse(response));
 
                 //Relacionando la lista con el adaptador
@@ -158,7 +160,7 @@ public class ViajesSugeridosActivity extends AppCompatActivity
                 viajes.add(new Trip(trip.getString("_id"),
                                     trip.getString("origin"),
                                     trip.getString("destiny"),
-                                    trip.getString("capMax"),
+                                    trip.getString("capCurrent"),
                                     trip.getString("date"),
                                     client_list));
             } catch (JSONException e) {

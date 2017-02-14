@@ -88,6 +88,7 @@ public class MainActivity extends AppCompatActivity
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 Intent intent = new Intent(MainActivity.this, ItemDetailActivity.class);
                 intent.putExtra("viaje", viajes.get(position));
+                intent.putExtra("mostrar_fab", false);
                 startActivity(intent);
             }
         });
@@ -97,7 +98,7 @@ public class MainActivity extends AppCompatActivity
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(this);
         //TODO: Acomodar esta IP
-        String url = "http://192.168.1.103:3000/partners/myTravels?email=" + email;
+        String url = "http://192.168.0.5:3000/partners/myTravels?email=" + email;
 
         final Context context = getApplicationContext();
 

@@ -1,5 +1,9 @@
 package com.argentruck.argentruck_partner;
 
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -12,8 +16,21 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
  * An activity representing a single Item detail screen. This
@@ -28,6 +45,7 @@ public class ItemDetailActivity extends AppCompatActivity implements AppBarLayou
     private Toolbar toolbar;
     private ListView mClientsList;
     private ClientsAdapter clientsAdapter;
+    private String email;
 
 
     @Override
@@ -40,14 +58,40 @@ public class ItemDetailActivity extends AppCompatActivity implements AppBarLayou
         AppBarLayout appBarLayout = (AppBarLayout) findViewById(R.id.app_bar);
         appBarLayout.addOnOffsetChangedListener(this);
 
-//        fab = (FloatingActionButton) findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own detail action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
+        fab = (FloatingActionButton) findViewById(R.id.fab);
+        if (getIntent().getBooleanExtra("mostrar_fab", false)) {
+            email = getIntent().getStringExtra("email");
+            fab.setVisibility(View.VISIBLE);
+        } else {
+            fab.setVisibility(View.INVISIBLE);
+        }
+
+        final Context context = getApplicationContext();
+        final Activity activity = this;
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder alert = new AlertDialog.Builder(activity);
+                alert.setTitle("Crear Viaje");
+                alert.setMessage("¿Está seguro que quiere crear el viaje?");
+                alert.setPositiveButton("SI", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        pedirCapacidad();
+//                                Toast.makeText(context, "El viaje se ha creado", Toast.LENGTH_LONG).show();
+                    }
+                });
+                alert.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(context, "El viaje sigue pendiente", Toast.LENGTH_LONG).show();
+                    }
+                });
+//                        .show();
+
+                AlertDialog alert11 = alert.create();
+                alert11.show();
+            }
+        });
 
         viaje = (Trip) getIntent().getSerializableExtra("viaje");
 
@@ -62,7 +106,6 @@ public class ItemDetailActivity extends AppCompatActivity implements AppBarLayou
 
         origenField.setText(viaje.getOrigen());
         destinoField.setText(viaje.getDestino());
-
 
 
         // savedInstanceState is non-null when there is fragment state
@@ -87,7 +130,6 @@ public class ItemDetailActivity extends AppCompatActivity implements AppBarLayou
 //                    .commit();
 //        }
 
-//        viaje = (Trip) getIntent().getSerializableExtra("viaje");
 
         // Instancia del ListView.
         mClientsList = (ListView) findViewById(R.id.clients_list);
@@ -108,7 +150,6 @@ public class ItemDetailActivity extends AppCompatActivity implements AppBarLayou
             }
         });
 
-//        getTripDetails();
     }
 
 //    @Override
@@ -128,8 +169,7 @@ public class ItemDetailActivity extends AppCompatActivity implements AppBarLayou
 //    }
 
     @Override
-    public void onOffsetChanged(AppBarLayout appBarLayout, int offset)
-    {
+    public void onOffsetChanged(AppBarLayout appBarLayout, int offset) {
 //        if (offset == 0)
 //        {
 //            fab.setVisibility(View.VISIBLE);
@@ -155,8 +195,6 @@ public class ItemDetailActivity extends AppCompatActivity implements AppBarLayou
                 String direction = viaje.getDestino().replace(" ", "+");
                 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("geo:<0>,<0>?q=" + direction));
                 startActivity(intent);
-//                Intent intent = new Intent(ClientsActivity.this, MapsActivity.class);
-//                startActivity(intent);
                 return true;
 
             default:
@@ -165,29 +203,79 @@ public class ItemDetailActivity extends AppCompatActivity implements AppBarLayou
 
     }
 
+    private void pedirCapacidad() {
+        final Context context = getApplicationContext();
+        final Activity activity = this;
+        final EditText edittext = new EditText(activity);
+        final LinearLayout horizontal = new LinearLayout(activity);
+        horizontal.setOrientation(LinearLayout.HORIZONTAL);
+        horizontal.setMinimumWidth(1000);
+        horizontal.setGravity(1);
+        horizontal.addView(edittext);
+//        horizontal.set
 
-//    private void getTripDetails() {
-//        // Instantiate the RequestQueue.
-//        RequestQueue queue = Volley.newRequestQueue(this);
-//        String url = "http://ip.jsontest.com/";
-//
-//        JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.GET, url,
-//                null, new Response.Listener<JSONObject>() {
-//            @Override
-//            public void onResponse(JSONObject response) {
-//                try {
-//                    mTextView.setText(response.get("ip").toString());
-//                } catch (JSONException e) {
-//
-//                }
-//            }
-//        }, new Response.ErrorListener() {
-//            @Override
-//            public void onErrorResponse(VolleyError error) {
-//                mTextView.setText("That didn't work!");
-//            }
-//        });
-//        // Add the request to the RequestQueue.
-//        queue.add(jsObjRequest);
-//    }
+        AlertDialog.Builder alert = new AlertDialog.Builder(activity);
+        alert.setTitle("Carga");
+        alert.setMessage("Ingrese la carga total a llevar");
+        alert.setView(horizontal);
+        alert.setPositiveButton("CREAR", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                crearViaje(edittext.getText().toString());
+//                Toast.makeText(context, "El viaje se ha creado", Toast.LENGTH_LONG).show();
+            }
+        });
+        alert.setNegativeButton("cancelar", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(context, "El viaje sigue pendiente", Toast.LENGTH_LONG).show();
+            }
+        });
+//                        .setIcon(android.R.drawable.ic_dialog_alert)
+        AlertDialog alert11 = alert.create();
+        alert11.show();
+    }
+
+    private void crearViaje(String capacidad) {
+        // Instantiate the RequestQueue.
+        RequestQueue queue = Volley.newRequestQueue(this);
+        //TODO: Acomodar esta ip!!!!!
+        final String url = "http://192.168.0.5:3000/partners/travel";
+
+        final Context context = getApplicationContext();
+
+        JSONObject jsParam = new JSONObject();
+        JSONObject mRequestParams = new JSONObject();
+
+        try {
+            mRequestParams.put("email", email);
+            mRequestParams.put("origin", viaje.getOrigen());
+            mRequestParams.put("destiny", viaje.getDestino());
+            mRequestParams.put("capMax", capacidad);
+            mRequestParams.put("date", viaje.getFecha());
+            mRequestParams.put("_id", viaje.getId());
+
+            jsParam.put("data", mRequestParams);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.PUT, url,
+                jsParam, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+//                if ((response.toString()).contains("created")) {
+                Toast.makeText(context, "Listo, viaje hecho", Toast.LENGTH_SHORT).show();
+                Intent intentMain = new Intent(context, MainActivity.class);
+                intentMain.putExtra("email", email);
+                startActivity(intentMain);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(context, error.toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
+        // Add the request to the RequestQueue.
+        queue.add(jsObjRequest);
+    }
 }
