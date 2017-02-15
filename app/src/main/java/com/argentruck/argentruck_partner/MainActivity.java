@@ -70,7 +70,6 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         setearImagenes();
-//        getTravelsInfo();
 
         // Instancia del ListView.
         mTripsList = (ListView) findViewById(R.id.trips_list);
@@ -104,7 +103,6 @@ public class MainActivity extends AppCompatActivity
     public void getTravelsInfo() {
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(this);
-        //TODO: Acomodar esta IP
         String url = getResources().getString(R.string.http_ip) + "/partners/myTravels?email=" + email;
 
         final Context context = getApplicationContext();
@@ -130,14 +128,6 @@ public class MainActivity extends AppCompatActivity
         // Add the request to the RequestQueue.
         queue.add(jsObjRequest);
     }
-
-//    @Override
-//    public void onDownScroll(){
-//        if( menuActualizado){
-//            get(null);
-//        }
-//        Toast.makeText(getApplicationContext(), "Carpeta actualizada", Toast.LENGTH_LONG).show();
-//    }
 
     public List<Trip> procesarResponse(JSONArray response) {
         List<Trip> viajes = new ArrayList<>();

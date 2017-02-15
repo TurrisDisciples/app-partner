@@ -59,8 +59,8 @@ public class RegisterActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Email Incorrecto", Toast.LENGTH_LONG).show();
             return false;
         }
-        if ((mContrasenaView.getText().toString().trim()).length() < 4) {
-            Toast.makeText(getApplicationContext(), "La contraseña es muy corta", Toast.LENGTH_LONG).show();
+        if ((mContrasenaView.getText().toString().trim()).length() < 8) {
+            Toast.makeText(getApplicationContext(), "La contraseña es muy corta, debe tener al menos 8 caracteres", Toast.LENGTH_LONG).show();
             return false;
         }
         if ((mCBUView.getText().toString().trim()).length()== 0) {
@@ -77,7 +77,6 @@ public class RegisterActivity extends AppCompatActivity {
     private void register() {
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(this);
-        //TODO: Acomodar esta ip!!!!!
         final String url = getResources().getString(R.string.http_ip) + "/partners/";
 
         final Context context = getApplicationContext();
@@ -110,13 +109,13 @@ public class RegisterActivity extends AppCompatActivity {
                     intentMain.putExtra("email", mEmailView.getText().toString().trim());
                     startActivity(intentMain);
                 } else {
-                    Toast.makeText(context, response.toString(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Error: Alguno de los datos ingresados es incorrecto", Toast.LENGTH_SHORT).show();
                 }
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(context, error.toString(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Error: Problema con el servidor", Toast.LENGTH_SHORT).show();
             }
         });
         // Add the request to the RequestQueue.

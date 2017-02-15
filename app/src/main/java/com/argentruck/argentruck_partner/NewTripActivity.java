@@ -73,7 +73,7 @@ public class NewTripActivity extends AppCompatActivity {
             return false;
         }
         if (TextUtils.isEmpty(fecha)) {
-            Toast.makeText(getApplicationContext(), "Este campo es obligatorio y con formato AAAA-MM-DD", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Este campo es obligatorio y con formato DD-MM-AAAA", Toast.LENGTH_LONG).show();
             mFecha.requestFocus();
             return false;
         }
@@ -83,7 +83,6 @@ public class NewTripActivity extends AppCompatActivity {
     private void registrarNuevoViaje() {
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(this);
-        //TODO: Acomodar esta ip!!!!!
         final String url = getResources().getString(R.string.http_ip) + "/partners/travel";
 
         final Context context = getApplicationContext();
@@ -112,13 +111,13 @@ public class NewTripActivity extends AppCompatActivity {
                     Toast.makeText(context, "Viaje creado correctamente", Toast.LENGTH_LONG).show();
                     finish();
                 } else {
-                    Toast.makeText(context, response.toString(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, "Error: Alguno de los datos ingresados es incorrecto", Toast.LENGTH_LONG).show();
                 }
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(context, error.toString(), Toast.LENGTH_LONG).show();
+                Toast.makeText(context, "Error: Problema con el servidor", Toast.LENGTH_LONG).show();
             }
         });
         // Add the request to the RequestQueue.

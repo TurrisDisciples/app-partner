@@ -58,7 +58,6 @@ public class PerfilActivity extends AppCompatActivity {
     private void getPartnerProfile() {
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(this);
-        //TODO: Acomodar esta IP
         String url = getResources().getString(R.string.http_ip) + "/partners/partner?email=" + email;
 
         final Context context = getApplicationContext();

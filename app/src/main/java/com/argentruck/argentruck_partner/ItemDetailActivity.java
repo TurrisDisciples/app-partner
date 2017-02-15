@@ -243,7 +243,6 @@ public class ItemDetailActivity extends AppCompatActivity implements AppBarLayou
     private void crearViaje(String capacidad) {
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(this);
-        //TODO: Acomodar esta ip!!!!!
         final String url = getResources().getString(R.string.http_ip) + "/partners/travel";
 
         final Context context = getApplicationContext();

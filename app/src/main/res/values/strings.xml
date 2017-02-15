@@ -13,7 +13,7 @@
     <string name="action_register">Crear Cuenta</string>
     <string name="action_sign_in_short">Iniciar Sesion</string>
     <string name="error_invalid_email">Direccion de email invalida</string>
-    <string name="error_invalid_password">La contraseña es demasiado corta</string>
+    <string name="error_invalid_password">"La contraseña es muy corta, debe tener al menos 8 caracteres"</string>
     <string name="error_incorrect_password">La contraseña es incorrecta</string>
     <string name="error_field_required">Este campo es obligatorio</string>
     <string name="permission_rationale">"Contacts permissions are needed for providing email
@@ -33,6 +33,6 @@
     <string name="title_activity_maps">Map</string>
     <string name="crear_viaje">Crear nuevo viaje</string>
     <string name="capacidad_maxima">Capacidad Maxima:</string>
-    <string name="fecha_viaje">Fecha (aaaa-mm-dd):</string>
-    <string name="http_ip">http://192.168.0.18:3000</string>
+    <string name="fecha_viaje">Fecha (dd-mm-aaaa):</string>
+    <string name="http_ip">http://192.168.0.27:3000</string>
 </resources>

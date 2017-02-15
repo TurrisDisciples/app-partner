@@ -97,7 +97,6 @@ public class ViajesSugeridosActivity extends AppCompatActivity
     public void getTravelsInfo() {
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(this);
-        //TODO: Acomodar esta IP
         String url = getResources().getString(R.string.http_ip) + "/partners/suggestedTravels";
 
         final Context context = getApplicationContext();
