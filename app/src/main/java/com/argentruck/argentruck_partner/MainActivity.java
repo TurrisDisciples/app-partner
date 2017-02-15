@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         setearImagenes();
-        getTravelsInfo();
+//        getTravelsInfo();
 
         // Instancia del ListView.
         mTripsList = (ListView) findViewById(R.id.trips_list);
@@ -94,11 +94,18 @@ public class MainActivity extends AppCompatActivity
         });
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();  // Always call the superclass method first
+
+        getTravelsInfo();
+    }
+
     public void getTravelsInfo() {
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(this);
         //TODO: Acomodar esta IP
-        String url = "http://192.168.0.5:3000/partners/myTravels?email=" + email;
+        String url = getResources().getString(R.string.http_ip) + "/partners/myTravels?email=" + email;
 
         final Context context = getApplicationContext();
 
@@ -134,7 +141,7 @@ public class MainActivity extends AppCompatActivity
 
     public List<Trip> procesarResponse(JSONArray response) {
         List<Trip> viajes = new ArrayList<>();
-        List<Client> client_list = new ArrayList<>();
+        List<Client> client_list;
         JSONObject trip = new JSONObject();
         JSONArray clients_registered;
         JSONObject client_data;
@@ -145,6 +152,7 @@ public class MainActivity extends AppCompatActivity
             try {
                 trip = response.getJSONObject(i);
                 clients_registered = trip.getJSONArray("registers");
+                client_list  = new ArrayList<>();
                 for(int j = 0; j < clients_registered.length(); j++) {
                     register_data = clients_registered.getJSONObject(j);
                     capacidad = register_data.getString("capacity");
@@ -162,7 +170,7 @@ public class MainActivity extends AppCompatActivity
                                     trip.getString("destiny"),
                                     trip.getString("capMax"),
                                     trip.getString("date"),
-                                    client_list));
+                                    client_list, trip.getString("capCurrent")));
             } catch (JSONException e) {
                 e.printStackTrace();
             }

@@ -52,14 +52,14 @@ public class TripsAdapter extends ArrayAdapter<Trip> {
 
         // Client actual.
         Trip viaje = getItem(position);
-
+        String inicial = viaje.getOrigen().substring(0,1).toUpperCase();
         TextDrawable drawable = TextDrawable.builder()
-                .buildRound(String.valueOf(contInicial), Color.BLUE);
+                .buildRound(inicial, Color.BLUE);
         contInicial++;
 
-        holder.inicial.setImageDrawable(drawable);
         holder.viaje.setText(viaje.getOrigen() + " - " + viaje.getDestino());
-        holder.capacidad.setText(viaje.getCapacidad() + " tn");
+        holder.inicial.setImageDrawable(drawable);
+        holder.capacidad.setText(viaje.getCapacidadRellena() + " tn");
         holder.fecha.setText(viaje.getFecha());
 
         return convertView;

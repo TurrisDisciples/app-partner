@@ -98,7 +98,7 @@ public class ViajesSugeridosActivity extends AppCompatActivity
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(this);
         //TODO: Acomodar esta IP
-        String url = "http://192.168.0.5:3000/partners/suggestedTravels";
+        String url = getResources().getString(R.string.http_ip) + "/partners/suggestedTravels";
 
         final Context context = getApplicationContext();
 
@@ -160,9 +160,9 @@ public class ViajesSugeridosActivity extends AppCompatActivity
                 viajes.add(new Trip(trip.getString("_id"),
                                     trip.getString("origin"),
                                     trip.getString("destiny"),
-                                    trip.getString("capCurrent"),
+                                    "-",
                                     trip.getString("date"),
-                                    client_list));
+                                    client_list, trip.getString("capCurrent")));
             } catch (JSONException e) {
                 e.printStackTrace();
             }

@@ -78,7 +78,7 @@ public class RegisterActivity extends AppCompatActivity {
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(this);
         //TODO: Acomodar esta ip!!!!!
-        final String url = "http://192.168.1.103:3000/partners/";
+        final String url = getResources().getString(R.string.http_ip) + "/partners/";
 
         final Context context = getApplicationContext();
 

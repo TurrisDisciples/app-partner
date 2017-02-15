@@ -103,9 +103,15 @@ public class ItemDetailActivity extends AppCompatActivity implements AppBarLayou
 
         final TextView origenField = (TextView) findViewById(R.id.origenField);
         final TextView destinoField = (TextView) findViewById(R.id.destinoField);
+        final TextView capacidadField = (TextView) findViewById(R.id.capacidadField);
+        final TextView capacidadRellenadaField = (TextView) findViewById(R.id.capacidadRellenadaField);
 
         origenField.setText(viaje.getOrigen());
         destinoField.setText(viaje.getDestino());
+        String capacidad = viaje.getCapacidad();
+        if (!capacidad.equals("-")) capacidad += " tn";
+        capacidadField.setText(capacidad);
+        capacidadRellenadaField.setText(viaje.getCapacidadRellena() + " tn");
 
 
         // savedInstanceState is non-null when there is fragment state
@@ -238,7 +244,7 @@ public class ItemDetailActivity extends AppCompatActivity implements AppBarLayou
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(this);
         //TODO: Acomodar esta ip!!!!!
-        final String url = "http://192.168.0.5:3000/partners/travel";
+        final String url = getResources().getString(R.string.http_ip) + "/partners/travel";
 
         final Context context = getApplicationContext();
 

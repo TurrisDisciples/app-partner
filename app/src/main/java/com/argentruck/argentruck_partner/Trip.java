@@ -11,8 +11,9 @@ public class Trip implements Serializable {
     private String capacidad;
     private String fecha;
     private List<Client> clientList;
+    private String capacidadRellena;
 
-    public Trip(String id, String origen, String destino, String capacidad, String fecha, List<Client> clientsList) {
+    public Trip(String id, String origen, String destino, String capacidad, String fecha, List<Client> clientsList, String capacidadRellena) {
 
         this.id = id;
         this.origen = origen;
@@ -20,6 +21,7 @@ public class Trip implements Serializable {
         this.capacidad = capacidad;
         this.fecha = fecha.substring(8, 10) + "/" + fecha.substring(5, 7) + "/" + fecha.substring(0, 4) ;
         this.clientList = clientsList;
+        this.capacidadRellena = capacidadRellena;
     }
 
     public String getId() {
@@ -52,6 +54,14 @@ public class Trip implements Serializable {
 
     public void setCapacidad(String capacidad) {
         this.capacidad = capacidad;
+    }
+
+    public String getCapacidadRellena() {
+        return capacidadRellena;
+    }
+
+    public void setCapacidadRellena(String capacidadRellena) {
+        this.capacidadRellena = capacidadRellena;
     }
 
     public String getFecha() {
