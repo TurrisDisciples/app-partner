@@ -80,10 +80,15 @@ public class PerfilActivity extends AppCompatActivity {
 
     private void procesarResponse(JSONObject response) {
         try{
+            String nombreAux = response.getString("nombre");
+            String apellidoAux = response.getString("apellido");
+            String direccionAux = response.getString("direccion");
+
+            String mNombre = nombreAux.isEmpty() ? "---" : nombreAux;
+            String mApellido = apellidoAux.isEmpty() ? "---" : apellidoAux;
+            String mDireccion = direccionAux.isEmpty() ? "---" : direccionAux;
+
             String mEmail = response.getString("email");
-            String mNombre = response.getString("nombre");
-            String mApellido = response.getString("apellido");
-            String mDireccion = response.getString("direccion");
             String mCBU = response.getString("cbu");
             String mTelefono = response.getString("telefono");
 

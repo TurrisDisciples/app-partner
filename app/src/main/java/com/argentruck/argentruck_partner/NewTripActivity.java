@@ -87,6 +87,9 @@ public class NewTripActivity extends AppCompatActivity {
 
         final Context context = getApplicationContext();
 
+        String fechaAux = mFecha.getText().toString().trim();
+        String date = (fechaAux.contains("/")) ? fechaAux.replaceAll("/","-") : fechaAux;
+
         JSONObject jsParam = new JSONObject();
         JSONObject mRequestParams = new JSONObject();
 
@@ -95,7 +98,7 @@ public class NewTripActivity extends AppCompatActivity {
             mRequestParams.put("origin", mOrigen.getText().toString().trim());
             mRequestParams.put("destiny", mDestino.getText().toString().trim());
             mRequestParams.put("capMax", mCapacidad.getText().toString().trim());
-            mRequestParams.put("date", mFecha.getText().toString().trim());
+            mRequestParams.put("date", date);
 
             jsParam.put("data", mRequestParams);
 
@@ -111,7 +114,11 @@ public class NewTripActivity extends AppCompatActivity {
                     Toast.makeText(context, "Viaje creado correctamente", Toast.LENGTH_LONG).show();
                     finish();
                 } else {
-                    Toast.makeText(context, "Error: Alguno de los datos ingresados es incorrecto", Toast.LENGTH_LONG).show();
+                    if ((response.toString()).contains("date")) {
+                        Toast.makeText(context, "Error: El formato de la fecha es incorrecto, debe ser AAAA-MM-DD", Toast.LENGTH_LONG).show();
+                    } else {
+                        Toast.makeText(context, "Error: Alguno de los datos ingresados es incorrecto", Toast.LENGTH_LONG).show();
+                    }
                 }
             }
         }, new Response.ErrorListener() {

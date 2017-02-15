@@ -33,6 +33,6 @@
     <string name="title_activity_maps">Map</string>
     <string name="crear_viaje">Crear nuevo viaje</string>
     <string name="capacidad_maxima">Capacidad Maxima:</string>
-    <string name="fecha_viaje">Fecha (dd-mm-aaaa):</string>
+    <string name="fecha_viaje">Fecha (aaaa-mm-dd):</string>
     <string name="http_ip">http://192.168.0.27:3000</string>
 </resources>
